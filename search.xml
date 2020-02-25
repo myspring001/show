@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>archives</title>
+    <url>/show/24/archives/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>gallery</title>
+    <url>/show/24/gallery/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>about</title>
+    <url>/show/24/about/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>人工智能</title>
+    <url>/show/24/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Python</title>
+    <url>/show/24/Python/</url>
+    <content><![CDATA[<h5 id="1-Python简介"><a href="#1-Python简介" class="headerlink" title="1.Python简介"></a>1.Python简介</h5><p>Python是一种跨平台的<a href="https://baike.baidu.com/item/计算机程序设计语言/7073760" target="_blank" rel="noopener">计算机程序设计语言</a>。是一种面向对象的动态类型语言，最初被设计用于编写自动化脚本(shell)，随着版本的不断更新和语言新功能的添加，越多被用于独立的、大型项目的开发。</p>
+<p>博主以前使用Python把喜欢看的小说正本各个章节都下载下来保存到手机上看。主要是手机没有多少流量才这样干的，不过在手机上直接保存为txt文本文件，看起来也挺方便的，还没有广告的打扰，喜欢看小说的朋友都知道，很多小说网站都有广告。</p>
+<p>可能有人会问Python能干什么，Python能实现很多，爬虫、人工智能、自动化测试等等，用Python写爬虫真的很不错。它的功能不仅仅是这些。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Java</title>
+    <url>/show/24/Java/</url>
+    <content><![CDATA[<h3 id="后台开发"><a href="#后台开发" class="headerlink" title="后台开发"></a>后台开发</h3>]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>导航</tag>
+        <tag>分享</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello</title>
+    <url>/show/24/hello/</url>
+    <content><![CDATA[<p>hello,大家好，我是码农一枚，从事软件开发工作多年，一直没有坚持写博客。</p>
+<p>以前也零零散散的写过些东西在新浪博客里，终究不是很严格的技术博客，算是记录下自己做的小demo.</p>
+<p>今天不管怎么样也算是开始了自己搭建博客的第一步，以后会慢慢的更加完善内容的输出，给大家带来更多的收获。小伙伴们如果喜欢的收藏下。</p>
+]]></content>
+  </entry>
+</search>

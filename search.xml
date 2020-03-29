@@ -1,51 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>archives</title>
-    <url>/show/24/archives/</url>
-    <content><![CDATA[]]></content>
+    <title>jsonb</title>
+    <url>/show//photos/</url>
+    <content><![CDATA[<p>JSON-B是用于将Java对象与JSON消息相互转换的标准绑定层。它定义了一种默认的映射算法，用于将现有的Java类转换为JSON。</p>
+<p>添加依赖：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- JSON-P --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.glassfish<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jakarta.json<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- JSON-B API --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>jakarta.json.bind<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jakarta.json.bind-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- Yasson (JSON-B implementation) --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.eclipse<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>yasson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>序列化和反序列化的使用：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public static class Dog &#123;</span><br><span class="line">    public String name;</span><br><span class="line">    public int age;</span><br><span class="line">    public boolean bites;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Create a dog instance</span><br><span class="line">Dog dog &#x3D; new Dog();</span><br><span class="line">dog.name &#x3D; &quot;Falco&quot;;</span><br><span class="line">dog.age &#x3D; 4;</span><br><span class="line">dog.bites &#x3D; false;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Create Jsonb and serialize</span><br><span class="line">Jsonb jsonb &#x3D; JsonbBuilder.create();</span><br><span class="line">String result &#x3D; jsonb.toJson(dog);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Deserialize back</span><br><span class="line">dog &#x3D; jsonb.fromJson(&quot;&#123;\&quot;name\&quot;:\&quot;Falco\&quot;,\&quot;age\&quot;:4,\&quot;bites\&quot;:false&#125;&quot;, Dog.class);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>对集合类型序列化：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; List of dogs</span><br><span class="line">List dogs &#x3D; new ArrayList();</span><br><span class="line">dogs.add(falco);</span><br><span class="line">dogs.add(cassidy);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Create Jsonb and serialize</span><br><span class="line">Jsonb jsonb &#x3D; JsonbBuilder.create();</span><br><span class="line">String result &#x3D; jsonb.toJson(dogs);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; We can also deserialize back into a raw collection, but since there is no way to infer a type here,</span><br><span class="line">&#x2F;&#x2F; the result will be a list of java.util.Map instances with string keys.</span><br><span class="line">dogs &#x3D; jsonb.fromJson(result, ArrayList.getClass());</span><br></pre></td></tr></table></figure>
+
+
+
+<p>格式化输出：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; Create custom configuration with formatted output</span><br><span class="line">JsonbConfig config &#x3D; new JsonbConfig()</span><br><span class="line">    .withFormatting(true);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Create Jsonb with custom configuration</span><br><span class="line">Jsonb jsonb &#x3D; JsonbBuilder.create(config);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Use it!</span><br><span class="line">String result &#x3D; jsonb.toJson(pojo);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>@JsonbProperty用于更改一个特定属性的名称。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line">    @JsonbProperty(&quot;person-name&quot;)</span><br><span class="line">    public String name;</span><br><span class="line"></span><br><span class="line">    public String profession;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生成的JSON文档将如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;person-name&quot;: &quot;Jason Bourne&quot;,</span><br><span class="line">    &quot;profession&quot;: &quot;Super Agent&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>@JsonbDateFormat和@JsonbNumberFormat批注来完成：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    @JsonbDateFormat(&quot;dd.MM.yyyy&quot;)</span><br><span class="line">    private LocalDate birthDate;</span><br><span class="line"></span><br><span class="line">    @JsonbNumberFormat(&quot;#0.00&quot;)</span><br><span class="line">    private BigDecimal salary;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; public getters&#x2F;setters ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>JSON-B  fastjson jackson gson 序列化的组件很多，大家可以根据自己的熟练程度和喜好使用。</p>
+]]></content>
+      <tags>
+        <tag>jsonb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>分布式文件系统</title>
+    <url>/show//fastdfs/</url>
+    <content><![CDATA[<h5 id="分布式文件系统"><a href="#分布式文件系统" class="headerlink" title="分布式文件系统"></a>分布式文件系统</h5><p>FastDFS是一个开源的高性能分布式文件系统。</p>
+<p>它的主要功能包括:文件存储、文件同步和文件访问(文件上传和文件下载)，它可以解决高容量和负载平衡问题。</p>
+<p>适合图片和视频网站</p>
+<p>FastDFS有两个角色:</p>
+<ul>
+<li>跟踪器 ：跟踪器负责文件访问的调度和负载平衡。</li>
+<li>存储：存储文件，它的功能是文件管理，包括:文件存储，文件同步，提供文件访问接口</li>
+</ul>
+<p>可以集群部署，可以在不影响在线服务的情况下随时添加和删除集群。</p>
+<p>数据存储:</p>
+<p><img src="%5Cimages%5Cstore.png" alt="store"></p>
+<p>访问图片文件效果：</p>
+<p><img src="%5Cimages%5Cfile.png" alt="file"></p>
+<p>注意：搭建好FastDFS还不能直接访问文件的，需要安装nginx ，配置模块后才能访问文件。</p>
+<p>接下来就是在项目中使用Java代码操作fastdfs进行文件上传，删除等。</p>
+<p>配置：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">connect_timeout</span> = <span class="string">2</span></span><br><span class="line"><span class="attr">network_timeout</span> = <span class="string">30</span></span><br><span class="line"><span class="attr">charset</span> = <span class="string">UTF-8</span></span><br><span class="line"><span class="meta">http.tracker_http_port</span> = <span class="string">80</span></span><br><span class="line"><span class="meta">http.anti_steal_token</span> = <span class="string">no</span></span><br><span class="line"><span class="meta">http.secret_key</span> = <span class="string">FastDFS1234567890</span></span><br><span class="line"><span class="attr">tracker_server</span> = <span class="string">192.168.96.128:22122</span></span><br></pre></td></tr></table></figure>
+
+<p>上传方法挺多的，可以选择上传到哪个分组</p>
+<p><img src="%5Cimages%5Cimage-20200323114457908.png" alt="image-20200323114457908"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">         ClientGlobal.init(fileName);</span><br><span class="line">TrackerClient tracker = <span class="keyword">new</span> TrackerClient();</span><br><span class="line">TrackerServer trackerServer = tracker.getTrackerServer();</span><br><span class="line">StorageServer storageServer = <span class="keyword">null</span>;</span><br><span class="line">StorageClient client = <span class="keyword">new</span> StorageClient(trackerServer, storageServer);</span><br><span class="line">NameValuePair nvp[]=<span class="keyword">new</span> NameValuePair[]&#123;</span><br><span class="line">		<span class="keyword">new</span>   NameValuePair(<span class="string">"name"</span>,<span class="string">"template_center_right_bannerbg2.c51ed112.png"</span>),</span><br><span class="line">		<span class="keyword">new</span> NameValuePair(<span class="string">"desc"</span>,<span class="string">"the test file"</span>)</span><br><span class="line">&#125;;</span><br><span class="line">String[] strings = client.upload_file(fileName,<span class="string">"png"</span>,nvp);</span><br></pre></td></tr></table></figure>
+
+<p>上传结果返回分组名称和文件名称</p>
+<p><img src="%5Cimages%5Cre.png" alt="re"></p>
+]]></content>
+      <tags>
+        <tag>分布式文件部署</tag>
+      </tags>
   </entry>
   <entry>
     <title>gallery</title>
-    <url>/show/24/gallery/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>about</title>
-    <url>/show/24/about/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>人工智能</title>
-    <url>/show/24/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Python</title>
-    <url>/show/24/Python/</url>
-    <content><![CDATA[<h5 id="1-Python简介"><a href="#1-Python简介" class="headerlink" title="1.Python简介"></a>1.Python简介</h5><p>Python是一种跨平台的<a href="https://baike.baidu.com/item/计算机程序设计语言/7073760" target="_blank" rel="noopener">计算机程序设计语言</a>。是一种面向对象的动态类型语言，最初被设计用于编写自动化脚本(shell)，随着版本的不断更新和语言新功能的添加，越多被用于独立的、大型项目的开发。</p>
-<p>博主以前使用Python把喜欢看的小说正本各个章节都下载下来保存到手机上看。主要是手机没有多少流量才这样干的，不过在手机上直接保存为txt文本文件，看起来也挺方便的，还没有广告的打扰，喜欢看小说的朋友都知道，很多小说网站都有广告。</p>
-<p>可能有人会问Python能干什么，Python能实现很多，爬虫、人工智能、自动化测试等等，用Python写爬虫真的很不错。它的功能不仅仅是这些。</p>
+    <url>/show//gallery/</url>
+    <content><![CDATA[<p>过年期间瞎做的一些东西，有手机APP，也有h5</p>
+<p><img src="%5Cimages%5C%E9%A6%96%E9%A1%B5.png" alt="首页"></p>
+<p>这个是手机APP，聊天使用的WebSocket,能够发送语音，图片，还有语音输入</p>
+<p><img src="%5Cimages%5C%E8%AF%AD%E9%9F%B3%E8%BE%93%E5%85%A5.png" alt="语音输入"></p>
+<p>表情包：</p>
+<p><img src="%5Cimages%5C%E8%A1%A8%E6%83%851.png" alt="表情1"></p>
+<p><img src="%5Cimages%5C%E8%A1%A8%E6%83%852.png" alt="表情2"></p>
+<p>下面这个是React做的后台管理系统：</p>
+<p><img src="%5Cimages%5Cop.png" alt="op"></p>
+<p><img src="%5Cimages%5Ctongji.png" alt="tongji"></p>
 ]]></content>
   </entry>
   <entry>
-    <title>Java</title>
-    <url>/show/24/Java/</url>
-    <content><![CDATA[<h3 id="后台开发"><a href="#后台开发" class="headerlink" title="后台开发"></a>后台开发</h3>]]></content>
+    <title>SpringCloud</title>
+    <url>/show//SpringCloud/</url>
+    <content><![CDATA[<p>SpringCloud很流行，但是公司是否要真的选择SpringCloud 微服务架构还要根据自身情况</p>
+<p>不可盲目追求。有些小项目，根本就不需要使用微服务，如果使用微服务反而会造成更大成本。</p>
+<p>SpringCloud在开发过程中，很多微服务都要启动，有些公司电脑配置也不行，很多公司还是8G内存配置，如果要启动多个项目，机器非常卡，本来SpringBoot，SpringCloud就很吃内存。在一个8g内存的笔记本电脑上同时启动，之前做过一个项目就是8g内存的笔记本启动4~5个微服务，还打开的数据库连接工具，浏览器等，不过jvm 参数调下还是可以的跑的很好的，毕竟只是本地跑。</p>
+<p>现在eureka，feign，zull, hystirx, config 这些都是过时了，可能有些公司还是在用。</p>
+]]></content>
+      <tags>
+        <tag>SpringCloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringBoot</title>
+    <url>/show//SpringBoot/</url>
+    <content><![CDATA[<p>SpringBoot启动流程</p>
+<p>首先运行SpringApplication的run方法，会执行如下这段代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ConfigurableApplicationContext <span class="title">run</span><span class="params">(String... args)</span> </span>&#123;</span><br><span class="line">		StopWatch stopWatch = <span class="keyword">new</span> StopWatch();</span><br><span class="line">		stopWatch.start();</span><br><span class="line">		ConfigurableApplicationContext context = <span class="keyword">null</span>;</span><br><span class="line">		Collection&lt;SpringBootExceptionReporter&gt; exceptionReporters = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		configureHeadlessProperty();</span><br><span class="line">		SpringApplicationRunListeners listeners = getRunListeners(args);</span><br><span class="line">		listeners.starting();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			ApplicationArguments applicationArguments = <span class="keyword">new</span> DefaultApplicationArguments(args);</span><br><span class="line">			ConfigurableEnvironment environment = prepareEnvironment(listeners, applicationArguments);</span><br><span class="line">			configureIgnoreBeanInfo(environment);</span><br><span class="line">			Banner printedBanner = printBanner(environment);</span><br><span class="line">			context = createApplicationContext();</span><br><span class="line">			exceptionReporters = getSpringFactoriesInstances(SpringBootExceptionReporter<span class="class">.<span class="keyword">class</span>,</span></span><br><span class="line">					new Class[] &#123; ConfigurableApplicationContext.class &#125;, context);</span><br><span class="line">			prepareContext(context, environment, listeners, applicationArguments, printedBanner);</span><br><span class="line">			refreshContext(context);</span><br><span class="line">			afterRefresh(context, applicationArguments);</span><br><span class="line">			stopWatch.stop();</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.logStartupInfo) &#123;</span><br><span class="line">				<span class="keyword">new</span> StartupInfoLogger(<span class="keyword">this</span>.mainApplicationClass).logStarted(getApplicationLog(), stopWatch);</span><br><span class="line">			&#125;</span><br><span class="line">			listeners.started(context);</span><br><span class="line">			callRunners(context, applicationArguments);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (Throwable ex) &#123;</span><br><span class="line">			handleRunFailure(context, ex, exceptionReporters, listeners);</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(ex);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			listeners.running(context);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (Throwable ex) &#123;</span><br><span class="line">			handleRunFailure(context, ex, exceptionReporters, <span class="keyword">null</span>);</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(ex);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> context;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>stopWatch 是计时用的，最终会在下面这句传入参数打印启动时长</p>
+<p>if (this.logStartupInfo) {<br>                new StartupInfoLogger(this.mainApplicationClass).logStarted(getApplicationLog(), stopWatch);<br>}</p>
+<p>获取监听器，开启监听；</p>
+<p>SpringApplicationRunListeners listeners = getRunListeners(args);<br>        listeners.starting();</p>
+<p>配置环境：</p>
+<p>ConfigurableEnvironment environment = prepareEnvironment(listeners, applicationArguments);<br>            configureIgnoreBeanInfo(environment);</p>
+<p>environment 就是如下这堆，指向配置信息</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">StandardServletEnvironment</span> <span class="string">&#123;activeProfiles=[], defaultProfiles=[default], propertySources=[ConfigurationPropertySourcesPropertySource &#123;name='configurationProperties'&#125;, StubPropertySource &#123;name='servletConfigInitParams'&#125;, StubPropertySource &#123;name='servletContextInitParams'&#125;, PropertiesPropertySource &#123;name='systemProperties'&#125;, OriginAwareSystemEnvironmentPropertySource &#123;name='systemEnvironment'&#125;, RandomValuePropertySource &#123;name='random'&#125;, OriginTrackedMapPropertySource &#123;name='applicationConfig: [classpath:/application.yml]'&#125;]&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings</span>(&#123; <span class="string">"unchecked"</span>, <span class="string">"rawtypes"</span> &#125;)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">SpringApplication</span><span class="params">(ResourceLoader resourceLoader, Class&lt;?&gt;... primarySources)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.resourceLoader = resourceLoader;</span><br><span class="line">	Assert.notNull(primarySources, <span class="string">"PrimarySources must not be null"</span>);</span><br><span class="line">	<span class="keyword">this</span>.primarySources = <span class="keyword">new</span> LinkedHashSet&lt;&gt;(Arrays.asList(primarySources));</span><br><span class="line">	<span class="keyword">this</span>.webApplicationType = WebApplicationType.deduceFromClasspath();</span><br><span class="line">	setInitializers((Collection) getSpringFactoriesInstances(ApplicationContextInitializer<span class="class">.<span class="keyword">class</span>))</span>;</span><br><span class="line">	setListeners((Collection) getSpringFactoriesInstances(ApplicationListener<span class="class">.<span class="keyword">class</span>))</span>;</span><br><span class="line">	<span class="keyword">this</span>.mainApplicationClass = deduceMainApplicationClass();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ClassUtils这个工具类的isPresent 方法是检查类是否存在并可以加载，如果依赖项不存在就无法加载。</p>
+<p>this.webApplicationType   是选择什么web服务器 </p>
+<p> 1.servlet  2.REACTIVE (webflux)来创建对应的上下文环境  3.none  非web项目</p>
+<p>  一般会返回SERVLET，就是普通的tomcat servlet 。实现tomcat就是要实现javax.servlet.Servlet接口</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">init(ServletConfig config)  初始化，只调用一次</span><br><span class="line">service  该方法会在客户端请求响应中反复调用</span><br><span class="line">destory  servlet容器关闭释放内存的时候调用destory方法。</span><br></pre></td></tr></table></figure>
+
+<p>webflux可以让你在web应用下也可以体验tcp长连接传输流数据, 非阻塞的web框架。可以进行响应式编程</p>
+<p>基于反应性堆栈，而不是servlet堆栈。</p>
+<p>如果不想打印SpringBoot这个Banner信息可以设置off，查看代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Banner <span class="title">printBanner</span><span class="params">(ConfigurableEnvironment environment)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span>.bannerMode == Banner.Mode.OFF) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	ResourceLoader resourceLoader = (<span class="keyword">this</span>.resourceLoader != <span class="keyword">null</span>) ? <span class="keyword">this</span>.resourceLoader</span><br><span class="line">			: <span class="keyword">new</span> DefaultResourceLoader(getClassLoader());</span><br><span class="line">	SpringApplicationBannerPrinter bannerPrinter = <span class="keyword">new</span> SpringApplicationBannerPrinter(resourceLoader, <span class="keyword">this</span>.banner);</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span>.bannerMode == Mode.LOG) &#123;</span><br><span class="line">		<span class="keyword">return</span> bannerPrinter.print(environment, <span class="keyword">this</span>.mainApplicationClass, logger);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> bannerPrinter.print(environment, <span class="keyword">this</span>.mainApplicationClass, System.out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以在application.yml文件中配置：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">spring：</span> </span><br><span class="line">   <span class="attr">main:</span> </span><br><span class="line">      <span class="attr">banner-mode:</span> <span class="string">off</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>下面就是初始化通过类加载器加载META-INF/spring.factories文件中配置的,实际加载路径就是如下的：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">jar:file:&#x2F;C:&#x2F;Users&#x2F;Administrator&#x2F;.m2&#x2F;repository&#x2F;org&#x2F;springframework&#x2F;boot&#x2F;spring-boot&#x2F;2.2.5.RELEASE&#x2F;spring-boot-2.2.5.RELEASE.jar!&#x2F;META-INF&#x2F;spring.factories</span><br></pre></td></tr></table></figure>
+
+<p>从spring.factories文件中读取配置类和监听器，分别进行初始化，然后设置到上下文环境中。</p>
+<p>总结下： </p>
+<ul>
+<li>运行程序入口main方法，调用SpringApplication.run  创建了一个SpringApplication实例</li>
+<li>设置web服务器类型webApplicationType，从META-INF/spring.factories中读取并初始化配置类和初始化监听器</li>
+<li>配置上下文环境，打印出banner信息，刷新应用程序上下文，打印启动信息</li>
+</ul>
+]]></content>
       <categories>
-        <category>后端</category>
+        <category>SpringBoot</category>
       </categories>
       <tags>
-        <tag>导航</tag>
-        <tag>分享</tag>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python</title>
+    <url>/show//Python/</url>
+    <content><![CDATA[<h5 id="1-Python简介"><a href="#1-Python简介" class="headerlink" title="1.Python简介"></a>1.Python简介</h5><p>Python是一种跨平台的<a href="https://baike.baidu.com/item/计算机程序设计语言/7073760" target="_blank" rel="noopener">计算机程序设计语言</a>。是一种面向对象的动态类型语言，最初被设计用于编写自动化脚本(shell)，随着版本的不断更新和语言新功能的添加，越多被用于独立的、大型项目的开发。</p>
+<p>博主以前使用Python把喜欢看的小说正本各个章节都下载下来保存到手机上看。主要是手机没有多少流量才这样干的，不过在手机上直接保存为txt文本文件，看起来也挺方便的，还没有广告的打扰，喜欢看小说的朋友都知道，很多小说网站都有广告。</p>
+<p>可能有人会问Python能干什么，Python能实现很多，爬虫、人工智能、自动化测试等等，用Python写爬虫真的很不错。不过它的功能不仅仅是这些，能做的很多。</p>
+<p>下面这张图片是我写这个这篇的时候重新爬了几章。在工作中主要使用的Java，之前爬取的视频是用Java做的，这里就不多做介绍了。</p>
+<p><img src="%5Cimages%5Cpa.png" alt="pa"></p>
+<p>当然python也可以做桌面程序，做web程序。</p>
+<p>下面简单举例web开发，有兴趣的话可以自己运行这段代码。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span>  web</span><br><span class="line"><span class="keyword">from</span> web <span class="keyword">import</span> form</span><br><span class="line"></span><br><span class="line">urls=(</span><br><span class="line">    <span class="string">'/'</span>,<span class="string">'Index'</span></span><br><span class="line">)</span><br><span class="line">render=web.templete.render(<span class="string">''</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span>  <span class="string">'Hello world !'</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app=web.application(urls,globals())</span><br><span class="line">    login=form.Form(</span><br><span class="line">        form.Textbox(<span class="string">'username'</span>),</span><br><span class="line">        form.Textbox(<span class="string">'passwd'</span>),</span><br><span class="line">        form.Button(<span class="string">'submit'</span>)</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">app.run()</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java</title>
+    <url>/show//Java/</url>
+    <content><![CDATA[<h4 id="1-dubbo管控台"><a href="#1-dubbo管控台" class="headerlink" title="1.dubbo管控台"></a>1.dubbo管控台</h4><p>Dubbo管控台可以对注册到zookeeper注册中心的服务或服务消费者进行管理，但管控台是否正常对Dubbo服务没有影响，管控台也不需要高可用，因此可以单节点部署。</p>
+<p>直接把dubbo-admin-2.5.3.war部署到tomcat即可</p>
+<p>配置dubbo.properties：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dubbo.registry.address&#x3D;zookeeper:&#x2F;&#x2F;192.168.1.101:2181        </span><br><span class="line">dubbo.admin.root.password&#x3D;123456            </span><br><span class="line">dubbo.admin.guest.password&#x3D;123456</span><br></pre></td></tr></table></figure>
+
+<p>运行效果：</p>
+<p><img src="%5Cimages%5Cdu.png" alt="du"></p>
+<p><img src="images%5Csu.png" alt="su"></p>
+]]></content>
+      <categories>
+        <category>dubbo</category>
+      </categories>
+      <tags>
+        <tag>dubbo</tag>
       </tags>
   </entry>
   <entry>
     <title>Hello</title>
-    <url>/show/24/hello/</url>
-    <content><![CDATA[<p>hello,大家好，我是码农一枚，从事软件开发工作多年，一直没有坚持写博客。</p>
-<p>以前也零零散散的写过些东西在新浪博客里，终究不是很严格的技术博客，算是记录下自己做的小demo.</p>
-<p>今天不管怎么样也算是开始了自己搭建博客的第一步，以后会慢慢的更加完善内容的输出，给大家带来更多的收获。小伙伴们如果喜欢的收藏下。</p>
+    <url>/show//hello/</url>
+    <content><![CDATA[<p>编程不仅仅是门艺术，更是艺术和思想，学习也是一样，技术分类很多，再加上往深入学习就更多了，而且没门技术都有各自独特的地方，一些小细节等等。</p>
+<p>就算是老天再给500年也不能学完吧，况且技术还是不断在更新，所以最好的学习不是死记硬背，我这记性也不是很好，最近在使用的技术还能记住点，这段时间不使用了，就基本上忘完了。假如下次我还要使用那个技术呢，当然还是能很快使用的，但是要预热下。</p>
 ]]></content>
   </entry>
 </search>

@@ -22,19 +22,25 @@
     var CONFIG = {"hostname":"myspring001.github.io","root":"/show/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="分类">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="https://myspring001.github.io/show/categories/index.html">
+  <meta name="description" content="分布式文件系统FastDFS是一个开源的高性能分布式文件系统。 它的主要功能包括:文件存储、文件同步和文件访问(文件上传和文件下载)，它可以解决高容量和负载平衡问题。 适合图片和视频网站 FastDFS有两个角色:  跟踪器 ：跟踪器负责文件访问的调度和负载平衡。 存储：存储文件，它的功能是文件管理，包括:文件存储，文件同步，提供文件访问接口  可以集群部署，可以在不影响在线服务的情况下随时添加和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式文件系统">
+<meta property="og:url" content="https://myspring001.github.io/show/fastdfs/index.html">
 <meta property="og:site_name" content="技术分享Blog">
-<meta property="og:description" content="分类">
+<meta property="og:description" content="分布式文件系统FastDFS是一个开源的高性能分布式文件系统。 它的主要功能包括:文件存储、文件同步和文件访问(文件上传和文件下载)，它可以解决高容量和负载平衡问题。 适合图片和视频网站 FastDFS有两个角色:  跟踪器 ：跟踪器负责文件访问的调度和负载平衡。 存储：存储文件，它的功能是文件管理，包括:文件存储，文件同步，提供文件访问接口  可以集群部署，可以在不影响在线服务的情况下随时添加和">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-29T10:01:13.000Z">
-<meta property="article:modified_time" content="2020-03-29T10:04:26.221Z">
+<meta property="og:image" content="https://myspring001.github.io/show/fastdfs/%5Cimages%5Cstore.png">
+<meta property="og:image" content="https://myspring001.github.io/show/fastdfs/%5Cimages%5Cfile.png">
+<meta property="og:image" content="https://myspring001.github.io/show/fastdfs/%5Cimages%5Cimage-20200323114457908.png">
+<meta property="og:image" content="https://myspring001.github.io/show/fastdfs/%5Cimages%5Cre.png">
+<meta property="article:published_time" content="2020-02-24T12:39:52.000Z">
+<meta property="article:modified_time" content="2020-03-23T06:35:47.813Z">
 <meta property="article:author" content="勇敢的小蚂蚁">
+<meta property="article:tag" content="分布式文件部署">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://myspring001.github.io/show/fastdfs/%5Cimages%5Cstore.png">
 
-<link rel="canonical" href="https://myspring001.github.io/show/categories/">
+<link rel="canonical" href="https://myspring001.github.io/show/fastdfs/">
 
 
 <script id="page-configurations">
@@ -42,12 +48,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>categories | 技术分享Blog
-  </title>
+  <title>分布式文件系统 | 技术分享Blog</title>
   
 
 
@@ -178,45 +183,152 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
           <div class="content">
             
 
   <div class="posts-expand">
-    
-    
-    
-    <div class="post-block" lang="zh-CN">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">categories
-</h1>
-
-<div class="post-meta">
+      
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://myspring001.github.io/show/fastdfs/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/show/images/mylogo.jpg">
+      <meta itemprop="name" content="勇敢的小蚂蚁">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术分享Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          分布式文件系统
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-24 20:39:52" itemprop="dateCreated datePublished" datetime="2020-02-24T20:39:52+08:00">2020-02-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 14:35:47" itemprop="dateModified" datetime="2020-03-23T14:35:47+08:00">2020-03-23</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>948</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h5 id="分布式文件系统"><a href="#分布式文件系统" class="headerlink" title="分布式文件系统"></a>分布式文件系统</h5><p>FastDFS是一个开源的高性能分布式文件系统。</p>
+<p>它的主要功能包括:文件存储、文件同步和文件访问(文件上传和文件下载)，它可以解决高容量和负载平衡问题。</p>
+<p>适合图片和视频网站</p>
+<p>FastDFS有两个角色:</p>
+<ul>
+<li>跟踪器 ：跟踪器负责文件访问的调度和负载平衡。</li>
+<li>存储：存储文件，它的功能是文件管理，包括:文件存储，文件同步，提供文件访问接口</li>
+</ul>
+<p>可以集群部署，可以在不影响在线服务的情况下随时添加和删除集群。</p>
+<p>数据存储:</p>
+<p><img src="%5Cimages%5Cstore.png" alt="store"></p>
+<p>访问图片文件效果：</p>
+<p><img src="%5Cimages%5Cfile.png" alt="file"></p>
+<p>注意：搭建好FastDFS还不能直接访问文件的，需要安装nginx ，配置模块后才能访问文件。</p>
+<p>接下来就是在项目中使用Java代码操作fastdfs进行文件上传，删除等。</p>
+<p>配置：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">connect_timeout</span> = <span class="string">2</span></span><br><span class="line"><span class="attr">network_timeout</span> = <span class="string">30</span></span><br><span class="line"><span class="attr">charset</span> = <span class="string">UTF-8</span></span><br><span class="line"><span class="meta">http.tracker_http_port</span> = <span class="string">80</span></span><br><span class="line"><span class="meta">http.anti_steal_token</span> = <span class="string">no</span></span><br><span class="line"><span class="meta">http.secret_key</span> = <span class="string">FastDFS1234567890</span></span><br><span class="line"><span class="attr">tracker_server</span> = <span class="string">192.168.96.128:22122</span></span><br></pre></td></tr></table></figure>
+
+<p>上传方法挺多的，可以选择上传到哪个分组</p>
+<p><img src="%5Cimages%5Cimage-20200323114457908.png" alt="image-20200323114457908"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">         ClientGlobal.init(fileName);</span><br><span class="line">TrackerClient tracker = <span class="keyword">new</span> TrackerClient();</span><br><span class="line">TrackerServer trackerServer = tracker.getTrackerServer();</span><br><span class="line">StorageServer storageServer = <span class="keyword">null</span>;</span><br><span class="line">StorageClient client = <span class="keyword">new</span> StorageClient(trackerServer, storageServer);</span><br><span class="line">NameValuePair nvp[]=<span class="keyword">new</span> NameValuePair[]&#123;</span><br><span class="line">		<span class="keyword">new</span>   NameValuePair(<span class="string">"name"</span>,<span class="string">"template_center_right_bannerbg2.c51ed112.png"</span>),</span><br><span class="line">		<span class="keyword">new</span> NameValuePair(<span class="string">"desc"</span>,<span class="string">"the test file"</span>)</span><br><span class="line">&#125;;</span><br><span class="line">String[] strings = client.upload_file(fileName,<span class="string">"png"</span>,nvp);</span><br></pre></td></tr></table></figure>
+
+<p>上传结果返回分组名称和文件名称</p>
+<p><img src="%5Cimages%5Cre.png" alt="re"></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>喜欢的话可以打赏哦</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/show/images/wechatpay.png" alt="勇敢的小蚂蚁 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
 </div>
 
-</header>
 
-      
-      
-      
-      <div class="post-body">
-          <p>分类</p>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/show/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E9%83%A8%E7%BD%B2/" rel="tag"># 分布式文件部署</a>
+          </div>
 
-      </div>
-      
-      
-      
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/show/gallery/" rel="prev" title="gallery">
+      <i class="fa fa-chevron-left"></i> gallery
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/show/photos/" rel="next" title="jsonb">
+      jsonb <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
+      </footer>
     
+  </article>
+  
+  
+  
 
-    
-    
-    
   </div>
 
 
@@ -268,6 +380,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#分布式文件系统"><span class="nav-number">1.</span> <span class="nav-text">分布式文件系统</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
